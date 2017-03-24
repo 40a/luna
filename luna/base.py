@@ -526,5 +526,7 @@ class Base(object):
 
         ret = self._mongo_collection.remove({'_id': self._id}, multi=False)
         self._wipe_vars()
-
-        return not ret['err']
+        if type(ret) == dict:
+            return not ret['err']
+        else:
+            return not ret
